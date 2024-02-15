@@ -1,0 +1,21 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Weather App build with AngularJs",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-loader": "^1.7.5",
+    "angular-route": "^1.7.5"
+
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "appPath": "app",
+  "moduleName": "weatherApp",
+  "scripts": {
+    "start": "http-server ./app -a localhost -p 8000 -c-1"
+  }
+}
