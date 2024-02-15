@@ -9,33 +9,22 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-app="weatherApp">
-  <div class="top-bar">
-    <div class="inner-bar w1280">
-      <div class="logo">WEATHER FORECAST</div>
-      <div class="search-bar">
-        <input type="text" class="inputSearch" placeholder="Type city name"/>
-      </div>
-    </div>
-  </div>
-  <div class="body-area w1280">
-
- <ul class="tabs">
-    <li><a href="#">Weather Today</a></li>
-    <li><a href="#">7 Days Forecast</a></li>
-  </ul>
-  </div>
- 
-
- 
   <div ng-view></div>
-
-  <div>AngularJS Weather App<span app-version></span></div>
-
-  
   <script src="libs/angular/angular.js"></script>
   <script src="libs/angular-route/angular-route.js"></script>
+
+  <!-- modules -->
+  <script src="modules/core-module.js"></script>
+
+  <!-- controllers -->
   <script src="app.js"></script>
+  <script src="controllers/main/main-controller.js"></script>
 
-
+  <!-- services -->
+  <script src="services/getCityWeather-service.js"></script>
+  <script src="services/searchCityByName-service.js"></script>
+  
+  <!-- Dependencies -->
+  <script src="config.js"></script>
 </body>
 </html>

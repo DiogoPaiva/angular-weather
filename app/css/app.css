@@ -16,3 +16,14 @@ html, body {
     width: 100%;
     height: 60px;
 }
+
+.cityList {
+ background-color: #fff;
+ padding: 2px;
+}
+
+.cityList .value {
+    height: 20px;
+    border-bottom: 1px solid #333;
+    padding: 5px;
+}

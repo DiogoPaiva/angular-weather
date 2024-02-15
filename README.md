@@ -17,3 +17,8 @@ An Weather application using AngularJs framework
 Just run this command:
 
 `yarn start`
+
+### Assumptions
+
+1- For the weather forecast, it will be only showned 7 days up ahead
+2- For the search city input, it will only dispach the search if there are at least 2 characters

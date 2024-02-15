@@ -1,0 +1,32 @@
+<div class="top-bar">
+    <div class="inner-bar w1280">
+      <div class="logo">WEATHER FORECAST</div>
+      <div class="search-bar" ng-include="'views/inputs/textInput.html'"></div>
+      <div class="cityList" ng-repeat="city in cityList">
+        <div class="value" ng-click="setCity(city.name)" ng-bind="city.name">{{city.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="body-area w1280">
+<div>
+  City INPUT: <b>{{city.inputName}}</b>
+</div>
+<div>CITYLISTY: {{cityList}}</div>
+ <ul class="tabs">
+    <li><a href="#">Weather Today</a></li>
+    <li><a href="#">7 Days Forecast</a></li>
+  </ul>
+
+
+  <div>
+    CURRENT:
+    <br/>
+    {{cityCurrentData}}
+  </div>
+  <hr/>
+  <div>
+    FORECAST:
+    <br/>
+    {{cityForecastData}}
+  </div>
+  </div>

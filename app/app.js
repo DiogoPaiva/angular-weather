@@ -1,11 +1,14 @@
-  angular.module('weatherApp', [
-    'ngRoute',
-    'weatherApp.view1',
-    'weatherApp.view2',
-    
-  ]).
-  config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+'use strict';
+
+  angular.module('weatherApp', ['weatherAppModule'])
+  .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
   
-    $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider
+    .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'mainController',
+        controllerAs: 'main'
+    }).otherwise({redirectTo: '/'});
+
   }]);
