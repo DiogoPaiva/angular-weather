@@ -1,0 +1,57 @@
+<div class="current-weather-panel">
+    <div class="item">
+        <span class="title">Maximum Temperature: </span>
+        <span class="value">
+            <span ng-if="temperature === 'fahrenheit'" ng-bind="cityTodayForecast.day.maxtemp_f"></span>
+            <span ng-if="temperature === 'celsius'" ng-bind="cityTodayForecast.day.maxtemp_c"></span>
+            <span>°</span>
+        </span> 
+    </div>
+    <div class="item">
+        <span class="title">Minimum Temperature: </span>
+        <span class="value">
+            <span ng-if="temperature === 'fahrenheit'" ng-bind="cityTodayForecast.day.mintemp_f"></span>
+            <span ng-if="temperature === 'celsius'" ng-bind="cityTodayForecast.day.mintemp_c"></span>
+            <span>°</span>
+        </span> 
+    </div>
+   
+    <div class="item">
+
+<!--
+cloud: 0
+​condition: Object { text: "Clear", icon: "//cdn.weatherapi.com/weather/64x64/night/113.png", code: 1000 }
+feelslike_c: 17
+feelslike_f: 62.6
+gust_kph: 24.1
+gust_mph: 15
+humidity: 68
+is_day: 0
+last_updated: "2024-02-16 19:15"
+last_updated_epoch: 1708110900
+precip_in: 0
+precip_mm: 0
+pressure_in: 30.33
+pressure_mb: 1027
+temp_c: 17
+temp_f: 62.6
+uv: 1
+vis_km: 10
+vis_miles: 6
+wind_degree: 330
+wind_dir: "NNW"
+wind_kph: 6.8
+wind_mph: 4.3
+-->
+        <div class="title">Wind</div>
+        <div class="value" ng-bind="cityCurrentData.wind_dir"></div>
+    </div>
+    <div class="title">Humidity</div>
+    <div class="title">Precipitation</div>
+    <div class="title">Presure</div>
+    <div class="title">UV Factor</div>
+    <div class="title">Visibility</div>
+    <div class="title">Air Quality</div>
+
+
+</div>

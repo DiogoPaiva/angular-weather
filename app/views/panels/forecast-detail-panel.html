@@ -1,0 +1,63 @@
+<div class="forecast-detail-panel" ng-if="forecastDetailDay.day">
+    <div class="detail-day-title">
+        <span> Forecast details for</span>
+        <span ng-bind="city.inputName"></span>
+        <span>at</span>
+        <span ng-bind="forecastDetailDay.dateValues.fullDate"></span>
+    </div>
+    <div class="detail-day">
+      <div class="item">
+          <span class="title">Average Temperature: </span>
+          <span class="value">
+            <span ng-if="temperature === 'celsius'" ng-bind="forecastDetailDay.day.avgtemp_c"></span>
+              <span ng-if="temperature === 'fahrenheit'" ng-bind="forecastDetailDay.day.avgtemp_f"></span>
+              <span>°</span>
+          </span> 
+      </div>
+  
+      <div class="item">
+          <span class="title">Maximum Temperature: </span>
+          <span class="value">
+              <span ng-if="temperature === 'fahrenheit'" ng-bind="forecastDetailDay.day.maxtemp_f"></span>
+              <span ng-if="temperature === 'celsius'" ng-bind="forecastDetailDay.day.maxtemp_c"></span>
+              <span>°</span>
+          </span> 
+      </div>
+  
+      <div class="item">
+          <span class="title">Minimum Temperature: </span>
+          <span class="value">
+              <span ng-if="temperature === 'celsius'" ng-bind="forecastDetailDay.day.mintemp_c"></span>
+              <span ng-if="temperature === 'fahrenheit'" ng-bind="forecastDetailDay.day.mintemp_f"></span>
+              <span>°</span>
+          </span> 
+         
+      </div>
+  
+      <div class="item">
+          <span class="title">Wind: </span>
+          <span class="value" ng-bind="forecastDetailDay.day.maxwind_kph"></span><span>Km/h</span>
+      </div>
+  
+      <div class="item">
+          <span class="title">Humidity: </span>
+          <span class="value" ng-bind="forecastDetailDay.day.avghumidity"></span><span>%</span>
+      </div>
+  
+      <div class="item" ng-if="forecastDetailDay.day.daily_will_it_rain === 1">
+          <span class="title">Precipitation: </span>
+          <span class="value" ng-bind="forecastDetailDay.day.totalprecip_mm"></span><span>mm</span>
+      </div>
+  
+      <div class="item">
+          <span class="title">UV Factor: </span>
+          <span class="value" ng-bind="forecastDetailDay.day.uv"></span>
+      </div>
+  
+      <div class="item">
+          <span class="title">Visibility: </span>
+          <span class="value" ng-bind="forecastDetailDay.day.avgvis_km"></span><span>Km</span>
+      </div>
+
+    </div>
+</div>

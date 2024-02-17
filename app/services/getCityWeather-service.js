@@ -14,7 +14,8 @@ angular.module('weatherAppModule').service('getCityService', ['$http', '$log', '
         // Request Query Params
         const params = {
             q: cityName,
-            days: 7,
+            days: 8,
+          //  aqi: 'yes',
             key: configs.WEATHER_API_KEY
         };
 

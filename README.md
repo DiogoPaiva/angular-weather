@@ -20,5 +20,7 @@ Just run this command:
 
 ### Assumptions
 
-1- For the weather forecast, it will be only showned 7 days up ahead
-2- For the search city input, it will only dispach the search if there are at least 2 characters
+1- For the weather forecast, it will only show 7 days ahead.
+2- For the search city input, it will only dispatch the search if there are at least 2 characters.
+3- On this project, and because it uses `AngularJs` without `Grunt`, for the simplicity of this exercise, it will be used `CSS` instead of `SASS`.
+To achieve this integration, it is needed to install `Ruby` globally and `Grunt` and this will cause some issues with deprecated library dependencies.
