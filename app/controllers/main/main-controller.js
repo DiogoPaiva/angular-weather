@@ -2,12 +2,16 @@
 
 angular.module('weatherApp').controller('mainController', ['$scope', '$timeout', 'getCityService', 'searchCityNameService', function ($scope, $timeout, getCityService, searchCityNameService) {
 
-    // Model for the cityName,  on the inputText and for the selected one from the list
+    // Model for the cityName, on the inputText and for the selected one on the dropdownlist
+    // Default value to Lisbon so that the page runs with information
+    // IMPROVEMENT : Use nearby service to detect geo location of the device and set the nearest city as default value. Requires user consent.
     $scope.city = {
-        inputName: '', 
-        selectedCity: ''
+        inputName: 'Lisboa', 
+        selectedCity: 'Lisboa'
     };
 
+    // Run the first time page loads
+    getCityForecast($scope.city.selectedCity);
 
     // Set Temperature units
     $scope.temperature = 'celsius';
@@ -49,17 +53,11 @@ angular.module('weatherApp').controller('mainController', ['$scope', '$timeout',
 
             // Current weather information
             $scope.cityCurrentData = weatherData.current;
-          
-            console.log("CURRENT: ",  $scope.cityTodayForecast )
-            console.log("FORECAST 7 DAYS: ", $scope.city7DaysForecast)
-            console.log("TODAY FORECAST : ", $scope.cityTodayForecast)
     
         }, function (error) {
             console.log("[MAIN CONTROLLER] - [getCityForecast] : error ", error)
         });
     }
-
-
 
     /* Helper function to retrieve the name of weekdays from a timestamp */
     function getWeekDays(timestamp) {
@@ -83,6 +81,39 @@ angular.module('weatherApp').controller('mainController', ['$scope', '$timeout',
         } ;
     }
 
+    $scope.getOnlyHours = function (timestamp) {
+
+        const date = new Date(timestamp);
+        const h = date.toLocaleTimeString('en-EN', { hour: 'numeric', minute: '2-digit', hourCycle: 'h24'})
+        const hours = h;
+
+        return hours;
+    }
+
+    // Based on the table located in 
+    // https://uk-air.defra.gov.uk/air-pollution/daqi
+    $scope.airQualityText = function(index) {
+        
+        // Very Good
+        if(index <= 3) {
+            return 'Very Good'
+        }
+
+        // Average
+        if(index > 3 && index <= 6) {
+            return 'Average'
+        }
+
+        // Bad
+        if(index > 6 && index <= 9) {
+            return 'Bad'
+        }
+
+        // Very Bad
+        if(index === 10) {
+            return 'Very Bad'
+        }
+    }
 
     // Set the City clicked on the search dropdown list 
     $scope.setCity = function (selectedCity) {

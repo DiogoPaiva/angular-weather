@@ -1,0 +1,19 @@
+<div class="search-wrapper">
+  <div class="search-bar">
+    <form name="cityForm">
+      <input type="text" value="city.inputName" tabindex="0" name="cityName" ng-model="city.inputName" ng-change="getCityList(city.inputName)" class="inputSearch" placeholder="Type city name"/>
+    </form>
+  </div>
+  <div class="dropdownlist">
+    <div class="cityList" ng-repeat="city in cityList">
+      <div class="city-item-list" tabindex="1" ng-click="setCity(city.name)">
+        <div class="city">
+          <span ng-bind="city.name"></span>
+          <span ng-if="city.name !== city.region"> - </span>
+          <span ng-if="city.name !== city.region" class="region" ng-bind="city.region"></span>
+        </div>
+        <div class="country" ng-bind="city.country"></div>
+      </div>
+    </div>
+  </div>
+</div>

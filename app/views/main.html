@@ -1,13 +1,10 @@
-<div class="top-bar">
+  <header class="top-bar">
     <div class="inner-bar w1280">
-      <div class="logo">WEATHER FORECAST</div>
-      <div class="search-bar" ng-include="'views/inputs/textInput.html'"></div>
-      <div class="cityList" ng-repeat="city in cityList">
-        <div class="value" ng-click="setCity(city.name)" ng-bind="city.name"></div>
-      </div>
+      <div class="logo">Meteo DP</div>
+      <div ng-include="'views/search/searchDropdownlist.html'"></div>
     </div>
-  </div>
-  <div class="body-area w1280">
+  </header>
+  <main class="body-area w1280">
     <div class="temperature-units">
       <div>Temperature : </div>
       <ul>
@@ -16,63 +13,68 @@
       </ul>
     </div>
     <div class="body-pannels">
-      <div class="left-panel" ng-if="city.selectedCity">
-        <div class="city-today">
-          <div class="city-name">Weather in {{city.inputName}}</div>
-          <div class="city-day-time">{{cityCurrentData.last_updated}}</div>
-          <div class="current-temperature">
-            <div class="big-temp" ng-if="temperature === 'celsius'">
-              <div><span ng-bind="cityCurrentData.temp_c"></span><span>°</span></div>
-              <div class="real-feal">Real feal <span ng-bind="cityCurrentData.feelslike_c"></span><span>°</span></div>
+      <div class="column-left" ng-if="city.selectedCity">
+        <div class="white-panel current-weather">
+          <div class="city-today">
+            <div class="city-name">Weather in {{city.selectedCity}}</div>
+            <div class="city-day-time">{{cityCurrentData.last_updated}}</div>
+            <div class="current-temperature">
+              <div class="big-temp" ng-if="temperature === 'celsius'">
+                <div><span ng-bind="cityCurrentData.temp_c"></span><span>°</span></div>
+                <div class="real-feal">Real feal <span ng-bind="cityCurrentData.feelslike_c"></span><span>°</span></div>
+              </div>
+              <div class="big-temp" ng-if="temperature === 'fahrenheit'">
+                <div><span ng-bind="cityCurrentData.temp_f"></span><span>°</span></div>
+                <div class="real-feal">Real feal <span ng-bind="cityCurrentData.feelslike_f"></span><span>°</span></div>
+              </div>
             </div>
-            <div class="big-temp" ng-if="temperature === 'fahrenheit'">
-              <div><span ng-bind="cityCurrentData.temp_f"></span><span>°</span></div>
-              <div class="real-feal">Real feal <span ng-bind="cityCurrentData.feelslike_f"></span><span>°</span></div>
+            <div class="current-icon">
+              <img ng-src="https:{{cityCurrentData.condition.icon}}" alt="{{cityCurrentData.condition.text}}" />
             </div>
+            <div class="current-description" ng-bind="cityCurrentData.condition.text"></div>
           </div>
-          <div class="current-icon">
-            <img ng-src="https:{{cityCurrentData.condition.icon}}" alt="{{cityCurrentData.condition.text}}" />
-          </div>
-          <div class="current-description" ng-bind="cityCurrentData.condition.text"></div>
         </div>
+       
       </div>
-      <div class="right-panel" ng-if="city.selectedCity">
-        <div class="tabs-wrapper" ng-controller="TabsController as tab">
-          <ul class="tabs-list">
-            <li ng-class="{ active: tab.isSet(1) }" ng-click="tab.setTab(1)">Weather Today</li>
-            <li ng-class="{ active: tab.isSet(2) }" ng-click="tab.setTab(2)">7 Days Forecast</li>
-          </ul>
-          <div class="tab-panel">
-            <div class="panel" ng-if="tab.isSet(1)" ng-class="{ active: tab.isSet(1) }">
-              <div ng-include="'views/panels/current-panel.html'"></div>
-            </div> 
-            <div class="panel" ng-if="tab.isSet(2)" ng-class="{ active: tab.isSet(2) }">
-              <div class="repeater-days">
-                <div class="day-wrapper" ng-repeat="day in city7DaysForecast" >
-                  <div class="day-inner" ng-class="{ active: day.date === forecastDetailDay.date }" ng-click="setDayDetail(day)">
-                    <div class="day-name" ng-bind="day.dateValues.dayName"></div>
-                    <div class="day-date">
-                      <span ng-bind="day.dateValues.dayValue"></span>
-                      <span ng-bind="day.dateValues.monthName"></span>
+      <div class="column-right" ng-if="city.selectedCity">
+        <div class="white-panel">
+          <div class="tabs-wrapper" ng-controller="TabsController as tab">
+            <ul class="tabs-list">
+              <li ng-class="{ active: tab.isSet(1) }" ng-click="tab.setTab(1)">Today</li>
+              <li ng-class="{ active: tab.isSet(2) }" ng-click="tab.setTab(2)">7 Days</li>
+            </ul>
+            <div class="tab-panel">
+              <div class="panel" ng-if="tab.isSet(1)" ng-class="{ active: tab.isSet(1) }">
+                <div ng-include="'views/panels/current-panel.html'"></div>
+              </div> 
+              <div class="panel" ng-if="tab.isSet(2)" ng-class="{ active: tab.isSet(2) }">
+                <div class="repeater-days">
+                  <div class="day-wrapper" ng-repeat="day in city7DaysForecast" >
+                    <div class="day-inner" ng-class="{ active: day.date === forecastDetailDay.date }" ng-click="setDayDetail(day)">
+                      <div class="day-name" ng-bind="day.dateValues.dayName"></div>
+                      <div class="day-date">
+                        <span ng-bind="day.dateValues.dayValue"></span>
+                        <span ng-bind="day.dateValues.monthName"></span>
+                      </div>
+                      <img ng-src="https:{{day.day.condition.icon}}" alt="{{day.day.condition.text}}" />
+                      <div class="temp-variation">
+                        <div ng-if="temperature === 'celsius'">
+                          <span class="temp-max" ng-bind="day.day.maxtemp_c"></span><span class="temp-max">°</span> / <span class="temp-min" ng-bind="day.day.mintemp_c"></span><span class="temp-min">°</span>
+                        </div>
+                        <div ng-if="temperature === 'fahrenheit'">
+                          <span class="temp-max" ng-bind="day.day.maxtemp_f"></span><span class="temp-max">°</span> / <span class="temp-min" ng-bind="day.day.mintemp_f"></span><span class="temp-min">°</span>
+                        </div>
+                      </div>                  
+                      <div ng-bind="day.day.condition.text"></div>
                     </div>
-                    <img ng-src="https:{{day.day.condition.icon}}" alt="{{day.day.condition.text}}" />
-                    <div class="temp-variation">
-                      <div ng-if="temperature === 'celsius'">
-                        <span class="temp-max" ng-bind="day.day.maxtemp_c"></span><span class="temp-max">°</span> / <span class="temp-min" ng-bind="day.day.mintemp_c"></span><span class="temp-min">°</span>
-                      </div>
-                      <div ng-if="temperature === 'fahrenheit'">
-                        <span class="temp-max" ng-bind="day.day.maxtemp_f"></span><span class="temp-max">°</span> / <span class="temp-min" ng-bind="day.day.mintemp_f"></span><span class="temp-min">°</span>
-                      </div>
-                    </div>                  
-                    <div ng-bind="day.day.condition.text"></div>
                   </div>
                 </div>
-              </div>
-            
-              <div ng-include="'views/panels/forecast-detail-panel.html'"></div>
-            </div> 
+              
+                <div ng-include="'views/panels/forecast-detail-panel.html'"></div>
+              </div> 
+            </div>
           </div>
         </div>
       </div>
     </div>
- </div>
+  </main>
