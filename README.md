@@ -1,4 +1,4 @@
-# angular-weather
+# angularJs-weather
 
 An Weather application using AngularJs framework
 
