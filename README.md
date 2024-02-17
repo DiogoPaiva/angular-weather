@@ -29,6 +29,9 @@ So, for the simplicity of this exercise, it will be used plain `CSS`.
 ### Assumptions
 
 1- For the weather forecast, it will only show 7 days ahead.
+
 2- The initial value for the city is "Lisboa", so that it can render a weather forecast on the initial page load;
+
 3- The language by default is English;
+
 4- For the search city input, it will only dispatch the search if there are at least 2 characters.
