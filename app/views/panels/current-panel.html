@@ -1,0 +1,106 @@
+<div class="current-weather-panel">
+    <div class="detail-day-title">
+        <span>Today's forecast in</span>
+        <span ng-bind="city.selectedCity"></span>
+    </div>
+    <div class="current-top-forecast">
+        <div class="day-wrapper">
+            <div class="day-inner">
+            <div class="day-name" ng-bind="cityTodayForecast.day.dateValues.dayName"></div>
+            <div class="day-date">
+                <span ng-bind="cityTodayForecast.day.dateValues.dayValue"></span>
+                <span ng-bind="cityTodayForecast.day.dateValues.monthName"></span>
+            </div>
+            <img ng-src="https:{{cityTodayForecast.day.condition.icon}}" alt="{{cityTodayForecast.day.condition.text}}" />
+            <div class="temp-variation">
+                <div class="temp-wrapper" ng-if="temperature === 'celsius'">
+                    <div class="temp-max"><span ng-bind="cityTodayForecast.day.maxtemp_c"></span><span>°</span></div>
+                    <div class="seperator">/</div> 
+                    <div class="temp-min"><span ng-bind="cityTodayForecast.day.mintemp_c"></span><span>°</span></div>
+                </div>
+                <div class="temp-wrapper" ng-if="temperature === 'fahrenheit'">
+                    <div class="temp-max"><span ng-bind="cityTodayForecast.day.maxtemp_f"></span><span>°</span></div>
+                    <div class="seperator">/</div> 
+                    <div class="temp-min"><span ng-bind="cityTodayForecast.day.mintemp_f"></span><span>°</span></div>
+                </div>
+            </div>                  
+            <div class="weather-condition" ng-bind="cityTodayForecast.day.condition.text"></div>
+            </div>
+        </div>
+        <div class="current-description">
+            <div class="item">
+                <span class="title">Max Wind: </span>
+                <span class="value" ng-bind="cityTodayForecast.day.maxwind_kph"></span><span>Km/h</span>
+            </div>
+            <div class="item">
+                <span class="title">Average Humidity: </span>
+                <span class="value" ng-bind="cityTodayForecast.day.avghumidity"></span><span>%</span>
+            </div>
+            <div class="item">
+                <span class="title">Precipitation: </span>
+                <span class="value" ng-if="cityTodayForecast.day.daily_will_it_rain === 0">Without rain for today</span>
+                <span class="value" ng-if="cityTodayForecast.day.daily_will_it_rain === 1" ng-bind="cityTodayForecast.day.totalprecip_mm"></span>
+                <span ng-if="cityTodayForecast.day.daily_will_it_rain === 1">mm</span>
+            </div>
+            <div class="item">
+                <span class="title">Snow    : </span>
+                <span class="value" ng-if="cityTodayForecast.day.daily_will_it_snow === 0">Without snow</span>
+                <span class="value" ng-if="cityTodayForecast.day.daily_will_it_snow === 1" ng-bind="cityTodayForecast.day.totalsnow_cm"></span>
+                <span ng-if="cityTodayForecast.day.daily_will_it_snow === 1">cm</span>
+            </div>
+            <div class="item">
+                <span class="title">UV factor: </span>
+                <span class="value" ng-bind="cityTodayForecast.day.uv"></span>
+            </div>
+            <div class="item">
+                <span class="title">Visibility: </span>
+                <span class="value" ng-bind="cityTodayForecast.day.avgvis_km"></span><span>Km</span>
+            </div>
+            <div class="item">
+                <span class="title">Air Quality: </span>
+                <span class="value" ng-bind="airQualityText(cityTodayForecast.day.gb-defra-index)"></span>
+            </div>
+        </div>
+    </div>
+    <div class="weather-by-hour">
+        <div class="detail-day-title">
+            <span>Today by the hour in</span>
+            <span ng-bind="city.selectedCity"></span>
+        </div>
+        <div class="repeater-by-hour">
+            <div class="repeater-item" ng-repeat="hour in cityTodayForecast.hour">
+                <div class="hours" ng-bind="getOnlyHours(hour.time)"></div>
+                <img class="weather-img" ng-src="https:{{hour.condition.icon}}" alt="{{hour.condition.text}}" />
+                <div class="temperature" ng-if="temperature === 'celsius'">
+                    <div><span ng-bind="hour.temp_c"></span><span>°</span></div>
+                </div>
+                <div class="temperature" ng-if="temperature === 'fahrenheit'">
+                    <div><span ng-bind="hour.temp_f"></span><span>°</span></div>
+                </div>    
+                <div class="temp-feal">
+                    <div class="text-description" ng-bind="hour.condition.text"></div>
+                    <div class="temp" ng-if="temperature === 'celsius'">
+                        <div class="real-feal">Real feal <span ng-bind="hour.feelslike_c"></span><span>°</span></div>
+                    </div>
+                    <div class="temp" ng-if="temperature === 'fahrenheit'">
+                        <div class="real-feal">Real feal <span ng-bind="hour.feelslike_f"></span><span>°</span></div>
+                    </div>
+                </div>
+                <div class="wind">
+                    <img class="icon-wind-direction" ng-src="assets/icons/arrow.png" ng-style="{ transform: 'rotate(-{{hour.wind_degree}}deg)' }" alt="Wind direction" />
+                    <div>
+                        <div ng-bind="hour.wind_dir"></div>
+                        <div>
+                            <span ng-bind="hour.wind_kph"></span>
+                            <span>km/h</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uv">
+                    <span>UV: </span>
+                    <span ng-bind="hour.uv"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
